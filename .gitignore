@@ -16,6 +16,9 @@ local.properties
 
 # Node
 node_modules
+admin-web/dist
+admin-web/dist-build
+admin-web/dist_build_*
 
 # IDE
 .idea
@@ -28,3 +31,10 @@ node_modules
 .cache
 tmp
 temp
+
+# Java/Maven
+backend-api/target
+
+# QA Artifacts
+qa-screenshots-admin
+admin-web/qa-screenshots-admin
