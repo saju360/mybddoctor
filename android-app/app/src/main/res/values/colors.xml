@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Deep Navy Background System ──────────────────────────────────────── -->
+    <color name="bg_dark">#060D1A</color>
+    <color name="bg_dark2">#0A1628</color>
+    <color name="bg_dark3">#0F1E35</color>
+    <color name="card_bg">#111F33</color>
+    <color name="card_bg_alt">#0D1829</color>
+    <color name="card_bg_elevated">#162540</color>
+
+    <!-- ── Glass Effect ───────────────────────────────────────────────────────── -->
+    <color name="glass_bg">#1A2A44</color>
+    <color name="glass_stroke">#FFFFFF1A</color>
+
+    <!-- ── Text ───────────────────────────────────────────────────────────────── -->
+    <color name="text_light">#F0F6FF</color>
+    <color name="text_secondary">#7A9CC4</color>
+    <color name="text_tertiary">#3D5A7A</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- ── Brand Red (Primary) ────────────────────────────────────────────────── -->
+    <color name="accent_red">#FF3B5C</color>
+    <color name="accent_red_dark">#CC1F3E</color>
+    <color name="accent_red_glow">#FF3B5C33</color>
+    <color name="accent_red_subtle">#FF3B5C1A</color>
+
+    <!-- ── Accent Colors ──────────────────────────────────────────────────────── -->
+    <color name="accent_green">#00D68F</color>
+    <color name="accent_green_glow">#00D68F33</color>
+    <color name="accent_blue">#4D9FFF</color>
+    <color name="accent_blue_glow">#4D9FFF33</color>
+    <color name="accent_amber">#FFB020</color>
+    <color name="accent_amber_glow">#FFB02033</color>
+    <color name="accent_purple">#A855F7</color>
+    <color name="accent_purple_glow">#A855F733</color>
+    <color name="accent_cyan">#06B6D4</color>
+    <color name="accent_cyan_glow">#06B6D433</color>
+
+    <!-- ── Badge Colors ───────────────────────────────────────────────────────── -->
+    <color name="badge_locked_bg">#4A0E1A</color>
+    <color name="badge_locked_text">#FF3B5C</color>
+    <color name="badge_approval_bg">#0E2040</color>
+    <color name="badge_approval_text">#4D9FFF</color>
+    <color name="badge_free_bg">#0A2E1E</color>
+    <color name="badge_free_text">#00D68F</color>
+
+    <!-- ── Card Strokes ───────────────────────────────────────────────────────── -->
+    <color name="card_stroke">#1E3A5F</color>
+    <color name="card_stroke_bright">#2D5080</color>
+    <color name="divider">#0F2040</color>
+
+    <!-- ── Icon Backgrounds ───────────────────────────────────────────────────── -->
+    <color name="icon_circle_bg">#162540</color>
+    <color name="icon_tint">#4D9FFF</color>
+
+    <!-- ── Widget Backgrounds ─────────────────────────────────────────────────── -->
+    <color name="widget_bg_emergency">#1A0A10</color>
+    <color name="widget_bg_premium">#0A1A12</color>
+    <color name="widget_bg_blue">#0A1428</color>
+
+    <!-- ── Gradient Start/End ─────────────────────────────────────────────────── -->
+    <color name="grad_start">#FF3B5C</color>
+    <color name="grad_end">#A855F7</color>
+    <color name="grad_blue_start">#4D9FFF</color>
+    <color name="grad_blue_end">#06B6D4</color>
+    <color name="grad_green_start">#00D68F</color>
+    <color name="grad_green_end">#4D9FFF</color>
+
+    <!-- ── Material3 Theme Roles ──────────────────────────────────────────────── -->
+    <color name="md_theme_primary">#FF3B5C</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_primary_container">#4A0E1A</color>
+    <color name="md_theme_surface">#111F33</color>
+    <color name="md_theme_surface_variant">#162540</color>
+    <color name="md_theme_on_surface">#F0F6FF</color>
+    <color name="md_theme_background">#060D1A</color>
+    <color name="md_theme_on_background">#F0F6FF</color>
+    <color name="md_theme_outline">#1E3A5F</color>
+
+    <!-- Aliases for backward compat -->
+    <color name="primary">#FF3B5C</color>
+    <color name="error">#FF3B5C</color>
+</resources>

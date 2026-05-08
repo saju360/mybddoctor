@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">LifePlus Healthcare</string>
+    <string name="app_tagline">Your health, our priority</string>
+
+    <!-- Auth labels -->
+    <string name="guest_label">Guest</string>
+    <string name="signed_in_label">Signed In</string>
+
+    <!-- Section headers -->
+    <string name="section_open_access">● OPEN ACCESS</string>
+    <string name="section_browse">● BROWSE (NO LOGIN)</string>
+    <string name="section_premium">● SIGN-IN REQUIRED</string>
+    <string name="section_approval">● NEEDS APPROVAL</string>
+
+    <!-- Feature names -->
+    <string name="feature_emergency_help">Emergency Help (Open Access)</string>
+    <string name="feature_blood_request">Blood Request</string>
+    <string name="feature_donor">Donor Registration</string>
+    <string name="feature_blood_org">Blood Organization</string>
+    <string name="feature_blood_bank">Blood Bank</string>
+    <string name="feature_hospital">Hospital</string>
+    <string name="feature_ambulance">Ambulance</string>
+    <string name="feature_clinic">Clinic</string>
+    <string name="feature_doctor">Doctor</string>
+    <string name="feature_telemedicine">Telemedicine Consultation</string>
+    <string name="feature_health_records">Digital Health Records</string>
+    <string name="feature_medicine_reminder">Medicine Reminder</string>
+    <string name="feature_pharmacy">Pharmacy</string>
+    <string name="feature_diagnostic">Diagnostic Center</string>
+    <string name="feature_appointment">Book Appointment</string>
+    <string name="feature_bmi">BMI Calculator</string>
+    <string name="feature_vaccination">Vaccination Schedule (EPI)</string>
+    <string name="feature_first_aid">First Aid Guide</string>
+    <string name="feature_profile">My Profile</string>
+    <!-- Badges -->
+    <string name="badge_free">Free</string>
+    <string name="premium_locked">Sign-in Required</string>
+    <string name="auth_plus_approval">Auth + Admin Approval</string>
+
+    <!-- Auth state -->
+    <string name="guest_state">Guest mode — emergency features available</string>
+    <string name="signed_in_state">Signed in — premium features unlocked</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Login / Register -->
+    <string name="login_subtitle">Sign in to access all features</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_password">Password (min 8 chars)</string>
+    <string name="hint_fullname">Full name</string>
+    <string name="hint_email">Email address</string>
+    <string name="hint_search">Search…</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="register_now">Register</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="create_account">Create Account</string>
+
+    <!-- Buttons -->
+    <string name="emergency">Emergency</string>
+    <string name="guest_blood_request">Guest Blood Request</string>
+    <string name="book">Book</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="retry">Retry</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="telemedicine">Telemedicine</string>
+
+    <!-- Form hints -->
+    <string name="hint_name">Name *</string>
+    <string name="hint_address">Address / Notes</string>
+    <string name="hint_extra">Extra field</string>
+
+    <!-- Toasts / Snackbars -->
+    <string name="emergency_available_without_login">Emergency feature available without login.</string>
+    <string name="blood_request_guest_allowed">Blood request can be submitted without sign-in.</string>
+    <string name="sign_in_needed_message">Please sign in to continue.</string>
+    <string name="approval_needed_message">Your account needs admin approval for this module.</string>
+    <string name="feature_opened">%1$s opened.</string>
+    <string name="network_error">⚠ No connection to server</string>
+    <string name="loading">Loading…</string>
+    <string name="no_data">No data found</string>
+    <string name="tap_to_edit">Tap to edit</string>
+    <string name="login_success">Welcome back!</string>
+    <string name="register_success">Account created! Please sign in.</string>
+    <string name="logout_confirm">Are you sure you want to sign out?</string>
+    <string name="booked_success">Appointment booked!</string>
+    <string name="submitted_success">Submitted successfully!</string>
+    <string name="deleted_success">Deleted successfully!</string>
+    <string name="saved_success">Saved successfully!</string>
+
+    <!-- Emergency form -->
+    <string name="emergency_subtitle">Fill in your location. Help will be dispatched immediately.</string>
+    <string name="help_on_the_way">Help is on the way</string>
+    <string name="emergency_instruction">Tap a number below to call instantly, or fill the form to send a specific emergency alert.</string>
+    <string name="police_fire">Police / Fire</string>
+    <string name="poison_control">Poison Control</string>
+    <string name="women_child_help">Women &amp; Child Help</string>
+    <string name="emergency_request_sent">Emergency request sent! Admin will verify and notify responders.</string>
+    <string name="specific_emergency_alert">Specific Emergency Alert</string>
+    <string name="fill_form_instruction">Fill the form to notify nearby responders</string>
+    <string name="exact_location">Exact Location</string>
+    <string name="location_placeholder">e.g. Dhanmondi Road 5, Dhaka</string>
+    <string name="send_alert_now">SEND ALERT NOW</string>
+    <string name="recent_history">Recent History</string>
+    <string name="hint_district">District *</string>
+    <string name="hint_upazila">Upazila</string>
+    <string name="hint_description">Describe the emergency</string>
+
+    <!-- Widgets -->
+    <string name="widget_emergency_label">Emergency SLA</string>
+    <string name="widget_emergency_value">Emergency SLA: &lt; 5 min dispatch</string>
+    <string name="widget_premium_label">Premium Access</string>
+    <string name="widget_premium_unlocked">Premium Access: Unlocked</string>
+    <string name="widget_premium_locked">Premium Access: Locked</string>
+
+    <!-- Screen titles -->
+    <string name="title_hospitals">Hospitals</string>
+    <string name="title_doctors">Doctors</string>
+    <string name="title_blood_requests">Blood Requests</string>
+    <string name="title_emergency">Emergency Request</string>
+    <string name="title_appointments">My Appointments</string>
+    <string name="title_reminders">Medicine Reminders</string>
+    <string name="title_health_records">Health Records</string>
+    <string name="title_donors">Blood Donors</string>
+    <string name="title_profile">My Profile</string>
+    <string name="title_ambulances">Ambulances</string>
+    <string name="title_clinics">Clinics</string>
+    <string name="title_pharmacies">Pharmacies</string>
+    <string name="title_diagnostics">Diagnostic Centers</string>
+    <string name="title_blood_banks">Blood Banks</string>
+    <string name="title_blood_orgs">Blood Organizations</string>
+    <string name="title_telemedicine">Telemedicine Sessions</string>
+    <string name="title_bmi">BMI Calculator</string>
+    <string name="title_vaccination">Vaccination Schedule (EPI BD)</string>
+    <string name="title_first_aid">First Aid Guide</string>
+    <string name="title_my_donors">My Donor Profiles</string>
+    <string name="title_my_blood_requests">My Blood Requests</string>
+
+    <!-- Intro slides -->
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="get_started">Get Started</string>
+    <string name="intro_title_1">LifePlus Healthcare</string>
+    <string name="intro_sub_1">Bangladesh\'s complete digital health companion — hospitals, doctors, blood, emergency and more in one app.</string>
+    <string name="intro_title_2">Emergency Help Anytime</string>
+    <string name="intro_sub_2">Submit emergency requests without login. Ambulance dispatch in under 5 minutes. Available 24/7 across all districts.</string>
+    <string name="intro_title_3">Blood When It Matters</string>
+    <string name="intro_sub_3">Find blood donors by group and district instantly. Submit blood requests as a guest. Connect with blood banks and organizations.</string>
+    <string name="intro_title_4">Your Health, Digitized</string>
+    <string name="intro_sub_4">Book doctor appointments, track medicine reminders, store health records, and access the EPI vaccination schedule — all offline-capable.</string>
+    <string name="slide_fallback_title_1">Emergency Support, Always On</string>
+    <string name="slide_fallback_subtitle_1">Fast district-level emergency routing and blood request access, even when network is unstable.</string>
+    <string name="slide_fallback_title_2">Modern Care Access</string>
+    <string name="slide_fallback_subtitle_2">Browse hospitals, doctors, clinics, diagnostics, ambulances and pharmacies in one premium dashboard.</string>
+    <string name="slide_fallback_title_3">Smart Health Journey</string>
+    <string name="slide_fallback_subtitle_3">Track records, reminders, BMI, telemedicine and vaccination schedule with a unified experience.</string>
+
+    <!-- BMI strings -->
+    <string name="bmi_enter_values">Enter weight and height</string>
+    <string name="bmi_underweight">Underweight</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_overweight">Overweight</string>
+    <string name="bmi_obese">Obese</string>
+    <string name="bmi_invalid">Invalid input</string>
+    <string name="bmi_inputs">Enter Your Details</string>
+    <string name="hint_weight_kg">Weight</string>
+    <string name="hint_height_cm">Height</string>
+    <string name="hint_age">Age</string>
+    <string name="calculate_bmi">Calculate BMI</string>
+    <string name="bd_bmi_note_title">🇧🇩 Bangladesh Note</string>
+    <string name="bd_bmi_note_body">WHO recommends lower BMI cutoffs for South Asian populations. Overweight starts at 23 (not 25) for Bangladeshis.</string>
+
+    <!-- Vaccination -->
+    <string name="epi_bd">EPI BD</string>
+
+    <!-- Misc -->
+    <string name="available">Available</string>
+    <string name="call">Call</string>
+    <string name="contact">Contact</string>
+    <string name="open_24h">24h Open</string>
+    <string name="filter_24h">Filter: 24h Open</string>
+    <string name="appointments">Appointments</string>
+    <string name="health_records">Health Records</string>
+    <string name="reminders">Reminders</string>
+    <string name="cancel_appt">Cancel Appointment</string>
+    <string name="cancel_appt_confirm">Are you sure you want to cancel this appointment?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Accessibility content descriptions -->
+    <string name="cd_auth_button">Toggle sign-in state</string>
+    <string name="cd_emergency_button">Trigger emergency request</string>
+    <string name="cd_blood_request_button">Submit guest blood request</string>
+    <string name="cd_feature_list">List of available features</string>
+    <string name="cd_toolbar">App toolbar</string>
+    <string name="cd_badge_locked">Feature requires sign-in</string>
+    <string name="cd_badge_approval">Feature requires admin approval</string>
+    <string name="app_settings">App Settings</string>
+    <string name="language_english">English</string>
+    <string name="language_bangla">Bangla</string>
+    <string name="language_label_dynamic">Language: %1$s</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="version_label">Version: %1$s</string>
+    <string name="close">Close</string>
+</resources>

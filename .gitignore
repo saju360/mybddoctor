@@ -1,0 +1,30 @@
+# Gradle
+.gradle
+**/.gradle
+.gradle-user-home
+.gradle-user-home2
+.gradle-user-home*
+**/.gradle-user-home*
+*.zip.part
+
+# Android
+build
+/app/build
+*.apk
+*.aab
+local.properties
+
+# Node
+node_modules
+
+# IDE
+.idea
+.vscode
+
+# Logs
+*.log
+
+# Cache
+.cache
+tmp
+temp

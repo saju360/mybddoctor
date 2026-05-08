@@ -1,0 +1,334 @@
+[
+  {
+    "viewport": "desktop",
+    "report": [
+      {
+        "route": "/",
+        "status": "PASS",
+        "detail": "h1=Dashboard",
+        "issues": [],
+        "screenshot": "desktop_dashboard.png"
+      },
+      {
+        "route": "/approvals",
+        "status": "PASS",
+        "detail": "h1=Approvals",
+        "issues": [],
+        "screenshot": "desktop__approvals.png"
+      },
+      {
+        "route": "/users",
+        "status": "PASS",
+        "detail": "h1=Users",
+        "issues": [],
+        "screenshot": "desktop__users.png"
+      },
+      {
+        "route": "/donors",
+        "status": "PASS",
+        "detail": "h1=Donors",
+        "issues": [],
+        "screenshot": "desktop__donors.png"
+      },
+      {
+        "route": "/blood-requests",
+        "status": "PASS",
+        "detail": "h1=Blood Requests",
+        "issues": [],
+        "screenshot": "desktop__blood-requests.png"
+      },
+      {
+        "route": "/blood-banks",
+        "status": "PASS",
+        "detail": "h1=Blood Banks",
+        "issues": [],
+        "screenshot": "desktop__blood-banks.png"
+      },
+      {
+        "route": "/blood-orgs",
+        "status": "PASS",
+        "detail": "h1=Blood Organizations",
+        "issues": [],
+        "screenshot": "desktop__blood-orgs.png"
+      },
+      {
+        "route": "/hospitals",
+        "status": "PASS",
+        "detail": "h1=Hospitals",
+        "issues": [],
+        "screenshot": "desktop__hospitals.png"
+      },
+      {
+        "route": "/doctors",
+        "status": "PASS",
+        "detail": "h1=Doctors",
+        "issues": [],
+        "screenshot": "desktop__doctors.png"
+      },
+      {
+        "route": "/clinics",
+        "status": "PASS",
+        "detail": "h1=Clinics",
+        "issues": [],
+        "screenshot": "desktop__clinics.png"
+      },
+      {
+        "route": "/ambulances",
+        "status": "PASS",
+        "detail": "h1=Ambulances",
+        "issues": [],
+        "screenshot": "desktop__ambulances.png"
+      },
+      {
+        "route": "/pharmacies",
+        "status": "PASS",
+        "detail": "h1=Pharmacies",
+        "issues": [],
+        "screenshot": "desktop__pharmacies.png"
+      },
+      {
+        "route": "/diagnostics",
+        "status": "PASS",
+        "detail": "h1=Diagnostic Centers",
+        "issues": [],
+        "screenshot": "desktop__diagnostics.png"
+      },
+      {
+        "route": "/emergency",
+        "status": "PASS",
+        "detail": "h1=Emergency Requests",
+        "issues": [],
+        "screenshot": "desktop__emergency.png"
+      },
+      {
+        "route": "/appointments",
+        "status": "PASS",
+        "detail": "h1=Appointments",
+        "issues": [],
+        "screenshot": "desktop__appointments.png"
+      },
+      {
+        "route": "/telemedicine",
+        "status": "PASS",
+        "detail": "h1=Telemedicine Sessions",
+        "issues": [],
+        "screenshot": "desktop__telemedicine.png"
+      },
+      {
+        "route": "/reminders",
+        "status": "PASS",
+        "detail": "h1=Medicine Reminders",
+        "issues": [],
+        "screenshot": "desktop__reminders.png"
+      },
+      {
+        "route": "/health-records",
+        "status": "PASS",
+        "detail": "h1=Health Records",
+        "issues": [],
+        "screenshot": "desktop__health-records.png"
+      },
+      {
+        "route": "/slides",
+        "status": "PASS",
+        "detail": "h1=Dashboard Slides",
+        "issues": [],
+        "screenshot": "desktop__slides.png"
+      },
+      {
+        "route": "/walkthrough",
+        "status": "PASS",
+        "detail": "h1=Walkthrough Slides",
+        "issues": [],
+        "screenshot": "desktop__walkthrough.png"
+      },
+      {
+        "route": "/notifications",
+        "status": "PASS",
+        "detail": "h1=Notifications Control",
+        "issues": [],
+        "screenshot": "desktop__notifications.png"
+      },
+      {
+        "route": "/ads-settings",
+        "status": "PASS",
+        "detail": "h1=Ads Settings",
+        "issues": [],
+        "screenshot": "desktop__ads-settings.png"
+      },
+      {
+        "route": "/settings",
+        "status": "PASS",
+        "detail": "h1=Global Settings",
+        "issues": [],
+        "screenshot": "desktop__settings.png"
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "report": [
+      {
+        "route": "/",
+        "status": "PASS",
+        "detail": "h1=Dashboard",
+        "issues": [],
+        "screenshot": "mobile_dashboard.png"
+      },
+      {
+        "route": "/approvals",
+        "status": "PASS",
+        "detail": "h1=Approvals",
+        "issues": [],
+        "screenshot": "mobile__approvals.png"
+      },
+      {
+        "route": "/users",
+        "status": "PASS",
+        "detail": "h1=Users",
+        "issues": [],
+        "screenshot": "mobile__users.png"
+      },
+      {
+        "route": "/donors",
+        "status": "PASS",
+        "detail": "h1=Donors",
+        "issues": [],
+        "screenshot": "mobile__donors.png"
+      },
+      {
+        "route": "/blood-requests",
+        "status": "PASS",
+        "detail": "h1=Blood Requests",
+        "issues": [],
+        "screenshot": "mobile__blood-requests.png"
+      },
+      {
+        "route": "/blood-banks",
+        "status": "PASS",
+        "detail": "h1=Blood Banks",
+        "issues": [],
+        "screenshot": "mobile__blood-banks.png"
+      },
+      {
+        "route": "/blood-orgs",
+        "status": "PASS",
+        "detail": "h1=Blood Organizations",
+        "issues": [],
+        "screenshot": "mobile__blood-orgs.png"
+      },
+      {
+        "route": "/hospitals",
+        "status": "PASS",
+        "detail": "h1=Hospitals",
+        "issues": [],
+        "screenshot": "mobile__hospitals.png"
+      },
+      {
+        "route": "/doctors",
+        "status": "PASS",
+        "detail": "h1=Doctors",
+        "issues": [],
+        "screenshot": "mobile__doctors.png"
+      },
+      {
+        "route": "/clinics",
+        "status": "PASS",
+        "detail": "h1=Clinics",
+        "issues": [],
+        "screenshot": "mobile__clinics.png"
+      },
+      {
+        "route": "/ambulances",
+        "status": "PASS",
+        "detail": "h1=Ambulances",
+        "issues": [],
+        "screenshot": "mobile__ambulances.png"
+      },
+      {
+        "route": "/pharmacies",
+        "status": "PASS",
+        "detail": "h1=Pharmacies",
+        "issues": [],
+        "screenshot": "mobile__pharmacies.png"
+      },
+      {
+        "route": "/diagnostics",
+        "status": "PASS",
+        "detail": "h1=Diagnostic Centers",
+        "issues": [],
+        "screenshot": "mobile__diagnostics.png"
+      },
+      {
+        "route": "/emergency",
+        "status": "PASS",
+        "detail": "h1=Emergency Requests",
+        "issues": [],
+        "screenshot": "mobile__emergency.png"
+      },
+      {
+        "route": "/appointments",
+        "status": "PASS",
+        "detail": "h1=Appointments",
+        "issues": [],
+        "screenshot": "mobile__appointments.png"
+      },
+      {
+        "route": "/telemedicine",
+        "status": "PASS",
+        "detail": "h1=Telemedicine Sessions",
+        "issues": [],
+        "screenshot": "mobile__telemedicine.png"
+      },
+      {
+        "route": "/reminders",
+        "status": "PASS",
+        "detail": "h1=Medicine Reminders",
+        "issues": [],
+        "screenshot": "mobile__reminders.png"
+      },
+      {
+        "route": "/health-records",
+        "status": "PASS",
+        "detail": "h1=Health Records",
+        "issues": [],
+        "screenshot": "mobile__health-records.png"
+      },
+      {
+        "route": "/slides",
+        "status": "PASS",
+        "detail": "h1=Dashboard Slides",
+        "issues": [],
+        "screenshot": "mobile__slides.png"
+      },
+      {
+        "route": "/walkthrough",
+        "status": "PASS",
+        "detail": "h1=Walkthrough Slides",
+        "issues": [],
+        "screenshot": "mobile__walkthrough.png"
+      },
+      {
+        "route": "/notifications",
+        "status": "PASS",
+        "detail": "h1=Notifications Control",
+        "issues": [],
+        "screenshot": "mobile__notifications.png"
+      },
+      {
+        "route": "/ads-settings",
+        "status": "PASS",
+        "detail": "h1=Ads Settings",
+        "issues": [],
+        "screenshot": "mobile__ads-settings.png"
+      },
+      {
+        "route": "/settings",
+        "status": "PASS",
+        "detail": "h1=Global Settings",
+        "issues": [],
+        "screenshot": "mobile__settings.png"
+      }
+    ]
+  }
+]

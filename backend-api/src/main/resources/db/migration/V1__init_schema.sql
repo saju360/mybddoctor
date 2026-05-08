@@ -1,0 +1,177 @@
+CREATE TABLE roles (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE users (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  full_name VARCHAR(120) NOT NULL,
+  phone VARCHAR(30) NOT NULL UNIQUE,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  preferred_language VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE donors (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  user_id BIGINT NOT NULL,
+  blood_group VARCHAR(10) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  upazila VARCHAR(80) NOT NULL,
+  available_now BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE blood_organizations (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  district VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE blood_banks (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  phone VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE blood_inventory (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  blood_bank_id BIGINT NOT NULL,
+  blood_group VARCHAR(10) NOT NULL,
+  units_available INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE blood_requests (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  requested_by_user_id BIGINT NULL,
+  blood_group VARCHAR(10) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'OPEN'
+);
+
+CREATE TABLE hospitals (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  upazila VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE clinics (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  district VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE doctors (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  full_name VARCHAR(120) NOT NULL,
+  specialty VARCHAR(120) NOT NULL,
+  hospital_id BIGINT NOT NULL
+);
+
+CREATE TABLE ambulances (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  provider_name VARCHAR(120) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  phone VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE approval_requests (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  entity_type VARCHAR(80) NOT NULL,
+  entity_id BIGINT NOT NULL,
+  requester_user_id BIGINT NOT NULL,
+  requested_role VARCHAR(80) NOT NULL,
+  notes VARCHAR(255) NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'PENDING'
+);
+
+CREATE TABLE appointments (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  user_id BIGINT NOT NULL,
+  doctor_id BIGINT NOT NULL,
+  appointment_date VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE emergency_requests (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  user_id BIGINT NULL,
+  district VARCHAR(80) NOT NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'OPEN'
+);
+
+CREATE TABLE pharmacies (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  phone VARCHAR(30) NOT NULL,
+  open24h BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE diagnostic_centers (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  district VARCHAR(80) NOT NULL,
+  tests_offered VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE telemedicine_sessions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  doctor_id BIGINT NOT NULL,
+  patient_user_id BIGINT NOT NULL,
+  scheduled_at VARCHAR(40) NOT NULL,
+  status VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE medicine_reminders (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  user_id BIGINT NOT NULL,
+  medicine_name VARCHAR(160) NOT NULL,
+  reminder_time VARCHAR(40) NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE health_records (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
+  user_id BIGINT NOT NULL,
+  record_type VARCHAR(80) NOT NULL,
+  record_data TEXT NOT NULL
+);

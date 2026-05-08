@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.LifePlus" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Status bar — transparent, white icons -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+
+        <!-- Material3 colour roles -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_on_primary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primary_container</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surface_variant</item>
+        <item name="colorOnSurface">@color/md_theme_on_surface</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_on_background</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
+
+        <!-- Ripple -->
+        <item name="colorControlHighlight">#FF3B5C22</item>
+
+    </style>
+
+    <!-- Splash theme — no action bar, full screen -->
+    <style name="Theme.LifePlus.Splash" parent="Theme.LifePlus">
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <!-- Toolbar text -->
+    <style name="TextAppearance.LifePlus.Toolbar" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <!-- Premium card style -->
+    <style name="Widget.LifePlus.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/card_bg</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/card_stroke</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- Premium button -->
+    <style name="Widget.LifePlus.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+    </style>
+
+    <!-- Outlined button -->
+    <style name="Widget.LifePlus.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textSize">14sp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="strokeColor">@color/card_stroke_bright</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <!-- TextInput premium style -->
+    <style name="Widget.LifePlus.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+        <item name="boxStrokeColor">@color/card_stroke_bright</item>
+        <item name="boxBackgroundColor">@color/card_bg_elevated</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+    </style>
+
+</resources>

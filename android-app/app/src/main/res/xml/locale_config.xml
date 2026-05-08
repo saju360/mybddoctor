@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Declares the locales supported by LifePlus Healthcare.
+    Required by AppCompatDelegate.setApplicationLocales() on Android 13+
+    so the system knows which languages the app supports.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en"/>
+    <locale android:name="bn"/>
+</locale-config>
