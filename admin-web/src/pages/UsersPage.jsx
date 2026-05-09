@@ -184,6 +184,7 @@ export default function UsersPage() {
             <select value={form.role}
               onChange={e => setForm({ ...form, role: e.target.value })}>
               <option value="USER">USER</option>
+              <option value="OWNER">OWNER</option>
               <option value="ADMIN">ADMIN</option>
               <option value="HOSPITAL_ADMIN">HOSPITAL_ADMIN</option>
               <option value="BLOOD_ORG_ADMIN">BLOOD_ORG_ADMIN</option>
@@ -228,6 +229,7 @@ export default function UsersPage() {
           <label>Role</label>
           <select value={roleForm.role} onChange={e => setRoleForm({ role: e.target.value })}>
             <option value="USER">USER — Regular user</option>
+            <option value="OWNER">OWNER — Service owner (manage own listings)</option>
             <option value="ADMIN">ADMIN — Full admin access</option>
             <option value="HOSPITAL_ADMIN">HOSPITAL_ADMIN — Manage hospitals</option>
             <option value="BLOOD_ORG_ADMIN">BLOOD_ORG_ADMIN — Manage blood orgs</option>

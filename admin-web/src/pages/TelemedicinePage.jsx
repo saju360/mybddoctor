@@ -7,20 +7,23 @@ const STATUS_COLORS  = { SCHEDULED:"badge-amber", IN_PROGRESS:"badge-blue", COMP
 const COLUMNS = [
   { key: "id",            label: "ID" },
   { key: "doctorId",      label: "Doctor ID" },
+  { key: "doctorName",    label: "Doctor" },
   { key: "patientUserId", label: "Patient ID" },
-  { key: "scheduledAt",   label: "Scheduled At" },
+  { key: "date",          label: "Date" },
+  { key: "time",          label: "Time" },
+  { key: "platform",      label: "Platform" },
   { key: "status",        label: "Status",
     render: (v) => <span className={`badge ${STATUS_COLORS[v]||""}`}>{v}</span> },
   { key: "meetingLink",   label: "Meeting Link",
     render: (v) => v ? <a href={v} target="_blank" rel="noreferrer" className="link">Open</a> : "—" },
-  { key: "notes",         label: "Notes" },
 ];
 
 const FIELDS = [
-  { key: "scheduledAt", label: "Scheduled At", required: true, placeholder: "YYYY-MM-DD HH:mm" },
+  { key: "date",        label: "Date",         required: true, placeholder: "YYYY-MM-DD" },
+  { key: "time",        label: "Time",         placeholder: "10:00 AM" },
+  { key: "platform",    label: "Platform",     placeholder: "Google Meet, Zoom…" },
   { key: "meetingLink", label: "Meeting Link", placeholder: "https://meet.google.com/…" },
   { key: "status",      label: "Status",       type: "select", options: STATUS_OPTIONS },
-  { key: "notes",       label: "Notes",        type: "textarea" },
 ];
 
 export default function TelemedicinePage() {

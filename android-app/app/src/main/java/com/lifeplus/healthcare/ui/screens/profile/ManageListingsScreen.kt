@@ -214,7 +214,9 @@ fun ClinicManageList(viewModel: ClinicViewModel = hiltViewModel(), onEdit: (Long
         if (action.isSuccess) android.widget.Toast.makeText(context, "Deleted successfully", android.widget.Toast.LENGTH_SHORT).show()
     }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No clinics registered.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No clinics registered.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { clinic ->
@@ -237,7 +239,9 @@ fun PharmacyManageList(viewModel: PharmacyViewModel = hiltViewModel(), onEdit: (
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No pharmacies registered.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No pharmacies registered.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->
@@ -260,7 +264,9 @@ fun AmbulanceManageList(viewModel: AmbulanceViewModel = hiltViewModel(), onEdit:
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No ambulances registered.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No ambulances registered.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->
@@ -283,7 +289,9 @@ fun BloodBankManageList(viewModel: BloodBankViewModel = hiltViewModel(), onEdit:
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No blood banks registered.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No blood banks registered.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->
@@ -305,7 +313,9 @@ fun DiagnosticManageList(viewModel: DiagnosticViewModel = hiltViewModel(), onEdi
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No diagnostics registered.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No diagnostics registered.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->
@@ -328,7 +338,9 @@ fun DoctorManageList(viewModel: DoctorViewModel = hiltViewModel(), onEdit: (Long
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No doctor profiles.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No doctor profiles.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->
@@ -351,7 +363,9 @@ fun BloodOrgManageList(viewModel: BloodOrgViewModel = hiltViewModel(), onEdit: (
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No blood orgs registered.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No blood orgs registered.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->
@@ -373,7 +387,9 @@ fun DonorManageList(viewModel: DonorViewModel = hiltViewModel(), onEdit: (Long) 
     val state by viewModel.state.collectAsState()
     LaunchedEffect(Unit) { viewModel.loadMy() }
 
-    if (state.data.isEmpty()) PremiumEmptyState("No donor registration.")
+    if (state.isLoading && state.data.isEmpty()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Primary) }
+    } else if (state.data.isEmpty()) PremiumEmptyState("No donor registration.")
     else {
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.data) { item ->

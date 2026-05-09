@@ -9,6 +9,8 @@ const COLUMNS = [
   { key: "testsOffered", label: "Tests Offered" },
   { key: "phone",        label: "Phone" },
   { key: "address",      label: "Address" },
+  { key: "status",       label: "Status",
+    render: (v) => <span className={`badge ${v === "APPROVED" ? "badge-green" : v === "REJECTED" ? "badge-red" : "badge-amber"}`}>{v || "PENDING"}</span> },
 ];
 
 const FIELDS = [
@@ -19,6 +21,9 @@ const FIELDS = [
     placeholder: "CBC, Blood Sugar, X-Ray, ECG…" },
   { key: "phone",        label: "Phone" },
   { key: "address",      label: "Address" },
+  { key: "status",       label: "Status", type: "select",
+    options: ["PENDING", "APPROVED", "REJECTED"] },
+  { key: "adminNotes",   label: "Admin Notes", type: "textarea" },
 ];
 
 export default function DiagnosticsPage() {

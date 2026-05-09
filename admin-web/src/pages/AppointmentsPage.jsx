@@ -8,6 +8,8 @@ const COLUMNS = [
   { key: "id",              label: "ID" },
   { key: "userId",          label: "User ID" },
   { key: "doctorId",        label: "Doctor ID" },
+  { key: "doctorName",      label: "Doctor" },
+  { key: "specialty",       label: "Specialty" },
   { key: "appointmentDate", label: "Date" },
   { key: "timeSlot",        label: "Time" },
   { key: "status",          label: "Status",

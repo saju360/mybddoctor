@@ -156,7 +156,7 @@ export default function EmergencyPage() {
       </div>
 
       <DataTable
-        columns={columns}
+        columns={COLUMNS}
         data={filter === "ALL" ? data : data.filter(d =>
           filter === "OPEN" ? (d.status === "OPEN" || d.status === "PENDING") : d.status === filter
         )}
@@ -166,6 +166,3 @@ export default function EmergencyPage() {
     </div>
   );
 }
-
-// Fix: use the COLUMNS constant defined above
-const columns = COLUMNS;

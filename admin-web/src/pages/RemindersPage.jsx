@@ -10,6 +10,8 @@ const COLUMNS = [
   { key: "frequency",    label: "Frequency" },
   { key: "active",       label: "Active",
     render: v => <span className={`badge ${v ? "badge-green" : "badge-red"}`}>{v ? "Yes" : "No"}</span> },
+  { key: "imageUrl",     label: "Image",
+    render: v => v ? <a href={v} target="_blank" rel="noreferrer" className="link">View ↗</a> : "—" },
 ];
 
 const FIELDS = [

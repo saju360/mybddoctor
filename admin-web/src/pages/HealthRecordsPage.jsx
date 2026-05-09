@@ -11,6 +11,8 @@ const COLUMNS = [
   { key: "facilityName", label: "Facility" },
   { key: "recordData",   label: "Data",
     render: (v) => v ? (v.length > 60 ? v.slice(0, 60) + "…" : v) : "—" },
+  { key: "imageUrl",     label: "Image",
+    render: (v) => v ? <a href={v} target="_blank" rel="noreferrer" className="link">View ↗</a> : "—" },
 ];
 
 export default function HealthRecordsPage() {
