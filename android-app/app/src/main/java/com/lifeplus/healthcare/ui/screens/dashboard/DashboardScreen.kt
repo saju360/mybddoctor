@@ -242,6 +242,7 @@ fun DashboardScreen(
     val donorProfile by donorViewModel.currentDonor.collectAsState()
 
     LaunchedEffect(Unit) {
+        configViewModel.loadSettings()  // Load feature flags first
         bloodViewModel.loadDashboard()
         dashboardViewModel.loadStats()
         dashboardViewModel.loadSlides()
@@ -281,9 +282,13 @@ fun DashboardScreen(
     }
 
     // Filter based on backend settings (defaults to true if not set)
-    val features = baseFeatures.filter { feature ->
-        val key = "feature_" + feature.title.lowercase().replace(" ", "_")
-        configViewModel.isFeatureEnabled(key, true)
+    // Uses appSettings as dependency so it recomposes when admin changes a setting
+    val features = remember(appSettings) {
+        baseFeatures.filter { feature ->
+            val key = "feature_" + feature.title.lowercase().replace(" ", "_")
+            val setting = appSettings.find { it.settingKey == key }
+            setting?.settingValue?.toBooleanStrictOrNull() ?: true
+        }
     }
 
     val isRefreshing = remember { mutableStateOf(false) }
@@ -302,6 +307,7 @@ fun DashboardScreen(
                 dashboardViewModel.loadStats()
                 dashboardViewModel.loadSlides()
                 appointmentViewModel.load()
+                configViewModel.loadSettings()  // Reload feature flags from admin panel
             }
         ) {
             Column(

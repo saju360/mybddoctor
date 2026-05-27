@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+    baseline-on-migrate: true
+
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+  forward-headers-strategy: framework
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    access-expiration-minutes: ${JWT_ACCESS_EXP_MIN:60}
+    refresh-expiration-days: ${JWT_REFRESH_EXP_DAYS:7}
+  demo-otp:
+    enabled: ${DEMO_OTP_ENABLED:false}
+    master-code: ${DEMO_OTP_MASTER_CODE:}
+

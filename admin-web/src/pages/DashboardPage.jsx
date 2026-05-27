@@ -33,49 +33,67 @@ export default function DashboardPage() {
   const loadAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [
-        users, donors, bloodReqs, hospitals, doctors, ambulances,
-        pharmacies, diagnostics, bloodBanks, approvals, emergency, appointments
-      ] = await Promise.all([
-        api.get("/users"),
-        api.get("/donors"),
-        api.get("/blood-requests"),
-        api.get("/hospitals"),
-        api.get("/doctors"),
-        api.get("/ambulances"),
-        api.get("/pharmacies"),
-        api.get("/diagnostics"),
-        api.get("/blood-banks"),
-        api.get("/approvals"),
-        api.get("/emergency-requests"),
-        api.get("/appointments"),
-      ]);
+      const sources = [
+        { key: "users", url: "/users" },
+        { key: "donors", url: "/donors" },
+        { key: "bloodRequests", url: "/blood-requests" },
+        { key: "hospitals", url: "/hospitals" },
+        { key: "doctors", url: "/doctors" },
+        { key: "ambulances", url: "/ambulances" },
+        { key: "pharmacies", url: "/pharmacies" },
+        { key: "diagnostics", url: "/diagnostics" },
+        { key: "bloodBanks", url: "/blood-banks" },
+        { key: "approvals", url: "/approvals" },
+        { key: "emergency", url: "/emergency-requests" },
+        { key: "appointments", url: "/appointments" },
+      ];
 
-      const pendingApprovals = approvals.data.filter(a => a.status === "PENDING");
-      const openEmergencies  = emergency.data.filter(e => e.status === "OPEN" || e.status === "PENDING");
-      const openBloodReqs    = bloodReqs.data.filter(r => r.status === "OPEN" || r.status === "PENDING");
+      const results = await Promise.allSettled(
+        sources.map((s) => api.get(s.url))
+      );
+
+      const dataMap = {};
+      const failed = [];
+
+      sources.forEach((s, idx) => {
+        const result = results[idx];
+        if (result.status === "fulfilled") {
+          dataMap[s.key] = Array.isArray(result.value?.data) ? result.value.data : [];
+        } else {
+          dataMap[s.key] = [];
+          failed.push(s.url);
+        }
+      });
+
+      const pendingApprovals = dataMap.approvals.filter(a => a.status === "PENDING");
+      const openEmergencies  = dataMap.emergency.filter(e => e.status === "OPEN" || e.status === "PENDING");
+      const openBloodReqs    = dataMap.bloodRequests.filter(r => r.status === "OPEN" || r.status === "PENDING");
 
       setCounts({
-        users:         users.data.length,
-        donors:        donors.data.length,
-        bloodRequests: bloodReqs.data.length,
-        hospitals:     hospitals.data.length,
-        doctors:       doctors.data.length,
-        ambulances:    ambulances.data.length,
-        pharmacies:    pharmacies.data.length,
-        diagnostics:   diagnostics.data.length,
-        bloodBanks:    bloodBanks.data.length,
+        users:         dataMap.users.length,
+        donors:        dataMap.donors.length,
+        bloodRequests: dataMap.bloodRequests.length,
+        hospitals:     dataMap.hospitals.length,
+        doctors:       dataMap.doctors.length,
+        ambulances:    dataMap.ambulances.length,
+        pharmacies:    dataMap.pharmacies.length,
+        diagnostics:   dataMap.diagnostics.length,
+        bloodBanks:    dataMap.bloodBanks.length,
         approvals:     pendingApprovals.length,
         emergency:     openEmergencies.length,
-        appointments:  appointments.data.length,
+        appointments:  dataMap.appointments.length,
       });
 
       setRecentApprovals(pendingApprovals.slice(0, 5));
-      setRecentUsers([...users.data].reverse().slice(0, 5));
+      setRecentUsers([...dataMap.users].reverse().slice(0, 5));
       setRecentEmergency(openEmergencies.slice(0, 4));
       setRecentBloodReqs(openBloodReqs.slice(0, 5));
-      setRecentDonors(donors.data.filter(d => d.availableNow).slice(0, 5));
+      setRecentDonors(dataMap.donors.filter(d => d.availableNow).slice(0, 5));
       setLastRefresh(new Date().toLocaleTimeString());
+
+      if (failed.length > 0) {
+        toast.error(`Some dashboard sources failed: ${failed.slice(0, 3).join(", ")}${failed.length > 3 ? "..." : ""}`);
+      }
     } catch {
       toast.error("Failed to load dashboard data.");
     } finally {

@@ -203,9 +203,11 @@ data class BloodRequest(
 // ── Emergency Request ─────────────────────────────────────────────────────────
 data class EmergencyRequest(
     @SerializedName("id") val id: Long = 0,
+    @SerializedName("userId") val userId: Long? = null,
     @SerializedName("callerName") val callerName: String = "",
-    @SerializedName("phone") val phone: String = "",
+    @SerializedName(value = "contactPhone", alternate = ["phone"]) val contactPhone: String = "",
     @SerializedName("district") val district: String = "",
+    @SerializedName("upazila") val upazila: String = "",
     @SerializedName("emergencyType") val emergencyType: String = "",
     @SerializedName("description") val description: String = "",
     @SerializedName("status") val status: String = "PENDING"

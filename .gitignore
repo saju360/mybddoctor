@@ -13,6 +13,9 @@ build
 *.apk
 *.aab
 local.properties
+keystore.properties
+*.jks
+*.keystore
 
 # Node
 node_modules

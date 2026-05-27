@@ -955,6 +955,7 @@ class ApprovalController {
         } else if (type.equals("blood_donor")) {
             Donor d = objectMapper.readValue(data, Donor.class);
             if (action == ApprovalAction.EDIT) d.setId(request.getEntityId());
+            d.setStatus("APPROVED");
             donorRepo.save(d);
         } else if (type.equals("ambulance")) {
             Ambulance a = objectMapper.readValue(data, Ambulance.class);

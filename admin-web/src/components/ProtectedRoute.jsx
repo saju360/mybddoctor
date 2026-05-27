@@ -7,14 +7,18 @@ import { useAuth } from "../context/AuthContext";
  * If adminOnly=true, redirects to / if not ADMIN role.
  */
 export function ProtectedRoute({ children, adminOnly = false }) {
-  const { loggedIn, isAdmin } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
   const location = useLocation();
 
-  if (!loggedIn) {
+  if (loading) {
+    return null;
+  }
+
+  if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (adminOnly && !isAdmin()) {
+  if (adminOnly && !isAdmin) {
     return <Navigate to="/" replace />;
   }
 

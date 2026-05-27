@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import com.lifeplus.healthcare.data.local.SessionDataStore
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
 // ── Generic list UI state ──────────────────────────────────────────────────────
@@ -27,6 +28,30 @@ data class ActionUiState(
     val isSuccess: Boolean = false,
     val error: String? = null
 )
+
+private fun normalizeDistrict(value: String?): String {
+    return value?.trim()?.lowercase()?.replace(" city", "") ?: ""
+}
+
+private fun <T> sortByCurrentDistrict(
+    items: List<T>,
+    currentDistrict: String?,
+    districtOf: (T) -> String?,
+    idOf: (T) -> Long
+): List<T> {
+    val normalizedCurrent = normalizeDistrict(currentDistrict)
+    if (normalizedCurrent.isBlank()) {
+        return items.sortedByDescending(idOf)
+    }
+
+    val local = items
+        .filter { normalizeDistrict(districtOf(it)) == normalizedCurrent }
+        .sortedBy(idOf)
+    val others = items
+        .filter { normalizeDistrict(districtOf(it)) != normalizedCurrent }
+        .sortedByDescending(idOf)
+    return local + others
+}
 
 // ── Hospital ViewModel ─────────────────────────────────────────────────────────
 @HiltViewModel
@@ -60,16 +85,16 @@ class HospitalViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<Hospital>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -78,7 +103,9 @@ class HospitalViewModel @Inject constructor(
     fun search(district: String) = viewModelScope.launch {
         _state.value = ListUiState<Hospital>(isLoading = true)
         when (val r = repo.search(district)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -197,16 +224,16 @@ class DoctorViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            filter(district = district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<Doctor>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -220,7 +247,9 @@ class DoctorViewModel @Inject constructor(
     ) = viewModelScope.launch {
         _state.value = ListUiState<Doctor>(isLoading = true)
         when (val r = repo.search(specialty, hospitalId, telemedicine, district)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -294,16 +323,16 @@ class AmbulanceViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun search(district: String? = null) = viewModelScope.launch {
         _state.value = ListUiState<Ambulance>(isLoading = true)
         when (val r = repo.search(district)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -312,7 +341,9 @@ class AmbulanceViewModel @Inject constructor(
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<Ambulance>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -379,16 +410,16 @@ class PharmacyViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<Pharmacy>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -397,7 +428,9 @@ class PharmacyViewModel @Inject constructor(
     fun search(district: String? = null, open24h: Boolean = false) = viewModelScope.launch {
         _state.value = ListUiState<Pharmacy>(isLoading = true)
         when (val r = repo.search(district, open24h)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -456,16 +489,16 @@ class BloodBankViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun search(district: String) = viewModelScope.launch {
         _state.value = ListUiState<BloodBank>(isLoading = true)
         when (val r = repo.search(district)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -474,7 +507,9 @@ class BloodBankViewModel @Inject constructor(
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<BloodBank>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -541,16 +576,16 @@ class DiagnosticViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<DiagnosticCenter>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -559,7 +594,9 @@ class DiagnosticViewModel @Inject constructor(
     fun search(district: String? = null, test: String? = null) = viewModelScope.launch {
         _state.value = ListUiState<DiagnosticCenter>(isLoading = true)
         when (val r = repo.search(district, test)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -618,16 +655,16 @@ class BloodOrgViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun search(district: String) = viewModelScope.launch {
         _state.value = ListUiState<BloodOrganization>(isLoading = true)
         when (val r = repo.search(district)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -636,7 +673,9 @@ class BloodOrgViewModel @Inject constructor(
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<BloodOrganization>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                data = sortByCurrentDistrict(r.data, _nearbyDistrict.value, { it.district }, { it.id })
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -747,16 +786,20 @@ class DonorViewModel @Inject constructor(
 
         if (district != null) {
             _nearbyDistrict.value = district
-            search(district = district, bloodGroup = null)
-        } else {
-            loadAll()
         }
+        loadAll()
     }
 
     fun loadAll() = viewModelScope.launch {
         _state.value = ListUiState<Donor>(isLoading = true)
         when (val r = repo.getAll()) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                // Only show APPROVED donors in the public list
+                data = sortByCurrentDistrict(
+                    r.data.filter { it.status == "APPROVED" && it.availableNow },
+                    _nearbyDistrict.value, { it.district }, { it.id }
+                )
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -774,7 +817,13 @@ class DonorViewModel @Inject constructor(
     fun search(district: String? = null, bloodGroup: String? = null) = viewModelScope.launch {
         _state.value = ListUiState<Donor>(isLoading = true)
         when (val r = repo.search(bloodGroup = bloodGroup, district = district)) {
-            is Resource.Success -> _state.value = ListUiState(data = r.data)
+            is Resource.Success -> _state.value = ListUiState(
+                // Only show APPROVED donors in the public list
+                data = sortByCurrentDistrict(
+                    r.data.filter { it.status == "APPROVED" && it.availableNow },
+                    _nearbyDistrict.value, { it.district }, { it.id }
+                )
+            )
             is Resource.Error   -> _state.value = ListUiState(error = r.message)
             Resource.Loading    -> _state.value = ListUiState(isLoading = true)
         }
@@ -979,12 +1028,17 @@ class EmergencyViewModel @Inject constructor(
                 return@launch
             }
             _state.value = ActionUiState(isLoading = true)
+
+            val currentUserId = session.userId.firstOrNull()
+
             val req = EmergencyRequest(
+                userId        = currentUserId,
                 callerName    = name.trim(),
-                phone         = phone.trim(),
+                contactPhone  = phone.trim(),
                 district      = district,
                 emergencyType = type,
-                description   = description.trim()
+                description   = description.trim(),
+                upazila       = ""
             )
             when (val r = repo.sendEmergency(req)) {
                 is Resource.Success -> {

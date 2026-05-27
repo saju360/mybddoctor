@@ -311,6 +311,7 @@ class DemoDataSeeder implements CommandLineRunner {
             d.setDistrict("Dhaka");
             d.setUpazila("Dhanmondi");
             d.setAvailableNow(true);
+            d.setStatus("APPROVED");
             d.setContactPhone(user.getPhone());
             d.setLastDonationDate("2026-03-10");
             d.setRewardPoints(120);

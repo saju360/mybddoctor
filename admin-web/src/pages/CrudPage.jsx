@@ -32,7 +32,9 @@ export default function CrudPage({
       const res = await api.get(endpoint);
       setData(Array.isArray(res.data) ? res.data : []);
       setSelected(new Set());
-    } catch { toast.error(`Failed to load ${title}.`); }
+    } catch (err) {
+      toast.error(err.response?.data?.message || `Failed to load ${title}.`);
+    }
     finally { setLoading(false); }
   }, [endpoint, title]);
 

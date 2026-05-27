@@ -1,10 +1,5 @@
 package com.lifeplus.healthcare.ui.screens.browse
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -28,6 +23,7 @@ import com.lifeplus.healthcare.ui.components.AppBackground
 import com.lifeplus.healthcare.presentation.viewmodel.DoctorViewModel
 import com.lifeplus.healthcare.presentation.viewmodel.HospitalViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.lifeplus.healthcare.presentation.viewmodel.ConfigViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,18 +31,40 @@ fun ExploreScreen(
     onNavigate: (String) -> Unit,
     onOpenDrawer: () -> Unit = {},
     doctorViewModel: DoctorViewModel = hiltViewModel(),
-    hospitalViewModel: HospitalViewModel = hiltViewModel()
+    hospitalViewModel: HospitalViewModel = hiltViewModel(),
+    configViewModel: ConfigViewModel = hiltViewModel()
 ) {
     var searchQuery by remember { mutableStateOf("") }
     val doctorState by doctorViewModel.state.collectAsState()
     val hospitalState by hospitalViewModel.state.collectAsState()
+    val appSettings by configViewModel.settings.collectAsState()
 
     LaunchedEffect(Unit) {
         doctorViewModel.loadAll()
         hospitalViewModel.loadAll()
     }
+
+    // Map category title → feature key (same logic as DashboardScreen)
+    val featureKeyMap = mapOf(
+        "Hospitals" to "feature_hospitals",
+        "Doctors" to "feature_doctors",
+        "Ambulances" to "feature_ambulance",
+        "Pharmacies" to "feature_pharmacies",
+        "Blood Banks" to "feature_blood_banks",
+        "Donors" to "feature_donor_list",
+        "Clinics" to "feature_clinics",
+        "Diagnostics" to "feature_diagnostics",
+        "Telemedicine" to "feature_telemedicine",
+        "Blood Req" to "feature_request_blood",
+    )
+
+    fun isCategoryEnabled(title: String): Boolean {
+        val key = featureKeyMap[title] ?: return true
+        val setting = appSettings.find { it.settingKey == key }
+        return setting?.settingValue?.toBooleanStrictOrNull() ?: true
+    }
     
-    val categories = listOf(
+    val allCategories = listOf(
         ServiceCategory("Hospitals", Icons.Default.LocalHospital, Primary, "browse_hospitals"),
         ServiceCategory("Doctors", Icons.Default.Person, Color(0xFF6366F1), "browse_doctors"),
         ServiceCategory("Ambulances", Icons.Default.DirectionsCar, WarningColor, "browse_ambulances"),
@@ -57,9 +75,14 @@ fun ExploreScreen(
         ServiceCategory("Diagnostics", Icons.Default.Science, Color(0xFF8B5CF6), "browse_diagnostics"),
         ServiceCategory("Telemedicine", Icons.Default.VideoCall, Color(0xFF3B82F6), "telemedicine"),
         ServiceCategory("Emergency", Icons.Default.Warning, Color(0xFFD32F2F), "emergency"),
-        ServiceCategory("Blood Req", Icons.Default.Favorite, Color(0xFFE91E63), "blood_request"),
+        ServiceCategory("Blood Req", Icons.Default.AddBox, Color(0xFFE91E63), "blood_request"),
         ServiceCategory("Blood Orgs", Icons.Default.Business, Color(0xFFD32F2F), "browse_blood_orgs")
     )
+
+    // Filter by feature flags from admin settings
+    val categories = remember(appSettings) {
+        allCategories.filter { isCategoryEnabled(it.title) }
+    }
 
     val toolCategories = listOf(
         ServiceCategory("BMI Calc", Icons.Default.MonitorWeight, Color(0xFF4CAF50), "bmi_calc"),
@@ -185,7 +208,6 @@ fun ExploreScreen(
                             FeaturedEntityCard(
                                 title = doctor.name.ifBlank { "Doctor" },
                                 subtitle = doctor.specialty.ifBlank { "Specialist" },
-                                image = null, // Placeholder or actual image URL
                         onClick = {
                             onNavigate(
                                 "details?title=${android.net.Uri.encode(doctor.name)}" +
@@ -206,7 +228,6 @@ fun ExploreScreen(
                             FeaturedEntityCard(
                                 title = hospital.name.ifBlank { "Hospital" },
                                 subtitle = hospital.district.ifBlank { "District" },
-                                image = null,
                         onClick = {
                             onNavigate(
                                 "details?title=${android.net.Uri.encode(hospital.name)}" +
@@ -224,7 +245,7 @@ fun ExploreScreen(
 }
 
 @Composable
-fun FeaturedEntityCard(title: String, subtitle: String, image: String?, onClick: () -> Unit) {
+fun FeaturedEntityCard(title: String, subtitle: String, onClick: () -> Unit) {
     Surface(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),

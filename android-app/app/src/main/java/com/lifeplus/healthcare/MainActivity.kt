@@ -55,12 +55,32 @@ import androidx.compose.material3.TextButton
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var networkObserver: NetworkObserver
+    private var navigateTo by mutableStateOf<String?>(null)
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
             // Permission granted
+        }
+    }
+
+    override fun onNewIntent(intent: android.content.Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: android.content.Intent) {
+        val target = intent.getStringExtra("navigate_to")
+            ?: when(intent.action) {
+                "OPEN_EMERGENCY" -> "emergency"
+                "OPEN_BLOOD_REQUEST" -> "blood_request"
+                "OPEN_BLOOD" -> "blood"
+                else -> null
+            }
+        if (target != null) {
+            navigateTo = target
         }
     }
 
@@ -97,12 +117,7 @@ class MainActivity : AppCompatActivity() {
         AdsManager.loadAppOpenAd(this)
 
         // Handle deep-link from ReminderBootReceiver notification or Widget
-        val navigateTo = intent?.getStringExtra("navigate_to")
-            ?: when(intent?.action) {
-                "OPEN_EMERGENCY" -> "emergency"
-                "OPEN_BLOOD_REQUEST" -> "blood_request"
-                else -> null
-            }
+        handleIntent(intent)
 
         setContent {
             val networkStatus by networkObserver.observe.collectAsState(initial = NetworkObserver.Status.Available)
@@ -154,7 +169,18 @@ class MainActivity : AppCompatActivity() {
                     // Handle deep-link navigation (e.g. from boot notification)
                     LaunchedEffect(navigateTo) {
                         if (!navigateTo.isNullOrBlank()) {
-                            navController.navigate(navigateTo)
+                            // Wait for NavController to be ready
+                            while (navController.currentDestination == null) {
+                                kotlinx.coroutines.delay(100)
+                            }
+                            try {
+                                val targetRoute = if (navigateTo!!.startsWith("/")) navigateTo!!.substring(1) else navigateTo!!
+                                navController.navigate(targetRoute)
+                            } catch (e: Exception) {
+                                android.util.Log.e("LifePlusNav", "Deep link failed: $navigateTo", e)
+                            } finally {
+                                navigateTo = null // Reset after navigation
+                            }
                         }
                     }
 
@@ -265,7 +291,12 @@ class MainActivity : AppCompatActivity() {
                                         launchSingleTop = true
                                     }
                                 } else {
-                                    navController.navigate(route)
+                                    try {
+                                        val targetRoute = if (route.startsWith("/")) route.substring(1) else route
+                                        navController.navigate(targetRoute)
+                                    } catch (e: Exception) {
+                                        android.util.Log.e("LifePlusNav", "Navigation failed: $route", e)
+                                    }
                                 }
                             })
                         }
@@ -360,6 +391,13 @@ class MainActivity : AppCompatActivity() {
                                 onNavigateBack = { navController.navigateUp() }
                             )
                         }
+                        composable("blood") {
+                            navController.navigate("browse_donors") {
+                                popUpTo("home")
+                                launchSingleTop = true
+                            }
+                        }
+
                         composable("blood_org") {
                             navController.navigate("browse_blood_orgs") {
                                 popUpTo("home")

@@ -344,7 +344,12 @@ fun EmergencyScreen(
                             text = context.getString(R.string.send_alert_now),
                             onClick = {
                                 if (name.isNotBlank() && phone.isNotBlank() && location.isNotBlank()) {
-                                    viewModel.send(name, phone, selectedDistrict, selectedType, location)
+                                    if (selectedDistrict == districts[0] || selectedType == emergencyTypes[0]) {
+                                        // Maybe show a toast or local error state
+                                        // For now, we'll just not send if placeholder is selected
+                                    } else {
+                                        viewModel.send(name, phone, selectedDistrict, selectedType, location)
+                                    }
                                 }
                             },
                             isLoading = state.isLoading,

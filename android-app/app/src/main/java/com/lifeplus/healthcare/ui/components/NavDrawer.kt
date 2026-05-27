@@ -43,11 +43,18 @@ fun NavDrawerContent(
     onNavigate: (String) -> Unit,
     onLogout: () -> Unit,
     onClose: () -> Unit,
-    authViewModel: AuthViewModel = hiltViewModel()
+    authViewModel: AuthViewModel = hiltViewModel(),
+    configViewModel: com.lifeplus.healthcare.presentation.viewmodel.ConfigViewModel = hiltViewModel()
 ) {
     val userRole by authViewModel.role.collectAsState()
     val isAuthorized = userRole?.uppercase() == "ADMIN" || userRole?.uppercase() == "OWNER"
+    val appSettings by configViewModel.settings.collectAsState()
     val context = LocalContext.current
+
+    fun isEnabled(key: String): Boolean {
+        val setting = appSettings.find { it.settingKey == key }
+        return setting?.settingValue?.toBooleanStrictOrNull() ?: true
+    }
 
     ModalDrawerSheet(
         drawerContainerColor = BackgroundLight,
@@ -159,8 +166,10 @@ fun NavDrawerContent(
                     color = TextSecondary,
                     modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
                 )
-                DrawerItem(Icons.Outlined.LocalHospital, "Hospitals", onClick = { onNavigate("browse_hospitals"); onClose() })
-                DrawerItem(Icons.Outlined.PersonSearch, "Doctors", onClick = { onNavigate("browse_doctors"); onClose() })
+                if (isEnabled("feature_hospitals"))
+                    DrawerItem(Icons.Outlined.LocalHospital, "Hospitals", onClick = { onNavigate("browse_hospitals"); onClose() })
+                if (isEnabled("feature_doctors"))
+                    DrawerItem(Icons.Outlined.PersonSearch, "Doctors", onClick = { onNavigate("browse_doctors"); onClose() })
                 DrawerItem(Icons.Outlined.Emergency, "Emergency Help", onClick = { onNavigate("emergency"); onClose() })
                 DrawerItem(Icons.Outlined.ChatBubbleOutline, "Messages", onClick = { onNavigate("chat"); onClose() })
                 

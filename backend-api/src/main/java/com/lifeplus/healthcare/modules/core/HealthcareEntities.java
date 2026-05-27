@@ -55,6 +55,7 @@ class Donor extends BaseEntity {
     @Column(nullable = false) private String district;
     @Column(nullable = false) private String upazila;
     @Column(nullable = false) private boolean availableNow = true;
+    @Column(nullable = false) private String status = "PENDING";
     @Column(nullable = true) private String contactPhone;
     @Column(nullable = true) private String lastDonationDate;
     @Column(nullable = false) private Integer rewardPoints = 0;

@@ -159,7 +159,7 @@
       {
         "route": "/settings",
         "status": "PASS",
-        "detail": "h1=Global Settings",
+        "detail": "h1=Android App Settings",
         "issues": [],
         "screenshot": "desktop__settings.png"
       }
@@ -170,12 +170,9 @@
     "report": [
       {
         "route": "/",
-        "status": "WARN",
+        "status": "PASS",
         "detail": "h1=Dashboard",
-        "issues": [
-          "requestfailed: http://localhost:8080/api/v1/donors :: net::ERR_ABORTED",
-          "requestfailed: http://localhost:8080/api/v1/appointments :: net::ERR_ABORTED"
-        ],
+        "issues": [],
         "screenshot": "mobile_dashboard.png"
       },
       {
@@ -328,7 +325,7 @@
       {
         "route": "/settings",
         "status": "PASS",
-        "detail": "h1=Global Settings",
+        "detail": "h1=Android App Settings",
         "issues": [],
         "screenshot": "mobile__settings.png"
       }

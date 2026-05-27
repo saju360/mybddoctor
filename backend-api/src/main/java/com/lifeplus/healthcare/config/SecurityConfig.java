@@ -43,6 +43,7 @@ public class SecurityConfig {
                         // Admin-only endpoints
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/approvals/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/notifications/my").authenticated()
                         .requestMatchers("/api/v1/notifications/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/v1/slides/all").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/slides/**").hasRole("ADMIN")

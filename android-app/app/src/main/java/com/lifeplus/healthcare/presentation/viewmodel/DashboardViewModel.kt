@@ -57,7 +57,11 @@ class DashboardViewModel @Inject constructor(
             try {
                 val docs = doctorRepo.getAll().let { if (it is Resource.Success) it.data.size else 0 }
                 val donorsRes = donorRepo.getAll()
-                val donors = if (donorsRes is Resource.Success) donorsRes.data else emptyList()
+                val allDonors = if (donorsRes is Resource.Success) donorsRes.data else emptyList()
+                
+                // Only count APPROVED and AVAILABLE donors to match the donor list
+                val donors = allDonors.filter { it.status == "APPROVED" && it.availableNow }
+                
                 val hosps = hospitalRepo.getAll().let { if (it is Resource.Success) it.data.size else 0 }
                 val reqs = bloodRepo.getAll().let { if (it is Resource.Success) it.data.size else 0 }
 

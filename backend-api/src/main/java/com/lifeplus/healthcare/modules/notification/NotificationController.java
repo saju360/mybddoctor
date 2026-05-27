@@ -23,20 +23,7 @@ public class NotificationController {
     @GetMapping("/my")
     public List<Notification> my(
             @RequestHeader(value = "X-Auth-User", required = false) String authUser) {
-        // Resolve user ID using a helper if possible, but let's just do it directly or via SecurityContext
-        var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || auth.getPrincipal() == null || "anonymousUser".equals(String.valueOf(auth.getPrincipal()))) {
-             if (authUser == null || authUser.isBlank()) {
-                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sign-in required");
-             }
-        }
-        
-        // This is a bit simplified. In a real app we'd use the resolved ID.
-        // For now, let's assume the client sends X-Auth-User as the ID if not using Spring Security fully.
-        Long userId = null;
-        try { userId = Long.parseLong(authUser); } catch (Exception ignored) {}
-        
-        if (userId == null) return List.of();
+        Long userId = ControllerGuards.ensureSignedInAndGetId(authUser);
         return notificationRepo.findByUserIdOrderByCreatedAtDesc(userId);
     }
 

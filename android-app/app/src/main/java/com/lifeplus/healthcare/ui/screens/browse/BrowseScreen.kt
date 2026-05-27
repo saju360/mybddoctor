@@ -108,14 +108,16 @@ fun BrowseScreen(
         }
     }
     val prioritizedItems = remember(filteredItems, nearbyDistrict) {
+        fun sortKey(item: BrowseItem): Long = item.id.toLongOrNull() ?: Long.MAX_VALUE
         val district = nearbyDistrict?.trim().orEmpty()
         if (district.isBlank()) {
-            filteredItems
+            filteredItems.sortedByDescending { sortKey(it) }
         } else {
             val (locationMatched, others) = filteredItems.partition { item ->
                 item.subtitle.contains(district, ignoreCase = true)
             }
-            locationMatched + others
+            locationMatched.sortedBy { sortKey(it) } +
+                others.sortedByDescending { sortKey(it) }
         }
     }
 

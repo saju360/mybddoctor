@@ -64,7 +64,11 @@ fun MainScreen(
                 onNavigate = { route ->
                     if (route.endsWith("_tab")) {
                         bottomNavController.navigate(route) {
-                            bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                            try {
+                                bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                            } catch (e: Exception) {
+                                // Graph not ready
+                            }
                             launchSingleTop = true
                             restoreState = true
                         }
@@ -86,10 +90,14 @@ fun MainScreen(
                     currentRoute = currentRoute,
                     onNavigate = { route ->
                         bottomNavController.navigate(route) {
-                            bottomNavController.graph.startDestinationRoute?.let { startRoute ->
-                                popUpTo(startRoute) {
-                                    saveState = true
+                            try {
+                                bottomNavController.graph.startDestinationRoute?.let { startRoute ->
+                                    popUpTo(startRoute) {
+                                        saveState = true
+                                    }
                                 }
+                            } catch (e: Exception) {
+                                // Graph not ready
                             }
                             launchSingleTop = true
                             restoreState = true
@@ -111,10 +119,12 @@ fun MainScreen(
                         composable("home_tab") {
                             com.lifeplus.healthcare.ui.screens.dashboard.DashboardScreen(
                                 onNavigate = { route ->
-                                    val premiumFeatures = listOf("appointments", "telemedicine", "health_records", "reminders", "manage_listings", "donor_register", "blood_org", "donation_requests", "chat")
+                                    val premiumFeatures = listOf("appointments", "telemedicine", "health_records", "reminders", "manage_listings", "donor_register", "blood", "blood_org", "donation_requests", "blood_request", "chat")
                                     if (route.endsWith("_tab")) {
                                         bottomNavController.navigate(route) {
-                                            bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                                            try {
+                                                bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                                            } catch (e: Exception) { }
                                             launchSingleTop = true
                                             restoreState = true
                                         }
@@ -130,10 +140,12 @@ fun MainScreen(
                         composable("search_tab") {
                             com.lifeplus.healthcare.ui.screens.browse.ExploreScreen(
                                 onNavigate = { route ->
-                                    val premiumFeatures = listOf("appointments", "telemedicine", "health_records", "reminders", "manage_listings", "donor_register", "blood_org", "donation_requests", "chat")
+                                    val premiumFeatures = listOf("appointments", "telemedicine", "health_records", "reminders", "manage_listings", "donor_register", "blood", "blood_org", "donation_requests", "blood_request", "chat")
                                     if (route.endsWith("_tab")) {
                                         bottomNavController.navigate(route) {
-                                            bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                                            try {
+                                                bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                                            } catch (e: Exception) { }
                                             launchSingleTop = true
                                             restoreState = true
                                         }
@@ -162,10 +174,12 @@ fun MainScreen(
                         composable("profile_tab") {
                             ProfileScreen(
                                 onNavigate = { route ->
-                                    val premiumFeatures = listOf("appointments", "telemedicine", "health_records", "reminders", "manage_listings", "donor_register", "blood_org", "donation_requests", "chat")
+                                    val premiumFeatures = listOf("appointments", "telemedicine", "health_records", "reminders", "manage_listings", "donor_register", "blood", "blood_org", "donation_requests", "blood_request", "chat")
                                     if (route.endsWith("_tab")) {
                                         bottomNavController.navigate(route) {
-                                            bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                                            try {
+                                                bottomNavController.graph.startDestinationRoute?.let { popUpTo(it) { saveState = true } }
+                                            } catch (e: Exception) { }
                                             launchSingleTop = true
                                             restoreState = true
                                         }
